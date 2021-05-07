@@ -3,27 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-using UnityEngine.Events;
-
-[System.Serializable]
-public class ItemUIEvent : UnityEvent<ItemUI> { }
-
 public class ItemUI : MonoBehaviour
 {
 	public Item item;
-	public Image iconRef;
+	[Space]
+	public Button button;
+	public Image image;
 
 	public void Refresh()
 	{
 		if (item)
 		{
-			if (iconRef.enabled == false) { iconRef.enabled = true; }
-			iconRef.sprite = item.icon;
+			if (image.enabled == false) { image.enabled = true; }
+			image.sprite = item.icon;
 		}
 		else
 		{
-			iconRef.sprite = null;
-			iconRef.enabled = false;
+			image.sprite = null;
+			image.enabled = false;
 		}
 	}
 }

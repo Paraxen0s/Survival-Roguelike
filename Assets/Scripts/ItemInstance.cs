@@ -5,6 +5,12 @@ using UnityEngine;
 public class ItemInstance : MonoBehaviour
 {
 	public Item item;
+	float durability = 0;
+
+	private void Start()
+	{
+		durability = item.durability;
+	}
 
 	public void Pickup(Inventory inventory)
 	{

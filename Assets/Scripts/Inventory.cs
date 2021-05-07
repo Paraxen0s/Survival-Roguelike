@@ -12,15 +12,14 @@ public class Inventory : MonoBehaviour
 		items.Add(item);
 	}
 
-	public void Remove(Item item)
+	public void RemoveByIndex(int i)
 	{
-		if (!items.Contains(item)) { return; }
-		items.Remove(item);
+		if (items[i] == null) { return; }
+		items.RemoveAt(i);
 	}
 
-	public void Use(Item item)
+	public void Clear()
 	{
-		item.Use();
-		items.Remove(item);
+		items.Clear();
 	}
-}  
+}

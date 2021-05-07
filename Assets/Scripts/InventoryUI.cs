@@ -1,49 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class InventoryUI : MonoBehaviour
 {
-	public GameObject inventoryCanvas;
 	public Inventory inventory;
 	public Transform content;
-	public GameObject itemSlotPrefab;
+	public GameObject prefab;
+
 	public List<ItemUI> itemSlots;
 
-	public GameObject player;
-
-	void Start()
+	private void Awake()
 	{
-		itemSlots = new List<ItemUI>(GetComponentsInChildren<ItemUI>());
+		itemSlots.Clear();
+		foreach (Transform slot in content.transform)
+		{
+			Destroy(slot.gameObject);
+		}
+
+		for (int i = 0; i < 6; i++)
+		{
+			itemSlots.Add(GameObject.Instantiate(prefab, content).GetComponent<ItemUI>());
+		}
 	}
 
-	public virtual void Update()
+	private void Update()
 	{
 		Refresh();
 	}
 
-	public virtual void Refresh()
+	public void Refresh()
 	{
-		int i = 0;
-		foreach (ItemUI slotUI in itemSlots)
+		for (int i = 0; i < itemSlots.Count; i++)
 		{
-			slotUI.item = null;
-
+			itemSlots[i].item = null;
 			if (i < inventory.items.Count)
 			{
-				slotUI.item = inventory.items[i];
+				itemSlots[i].item = inventory.items[i];
 			}
-
-			slotUI.Refresh();
-
-			i++;
+			itemSlots[i].Refresh();
 		}
-	}
-
-	public void UseItem(Item item)
-	{
-		inventory.Use(item);
 	}
 }

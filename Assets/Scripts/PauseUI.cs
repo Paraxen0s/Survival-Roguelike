@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PauseUI : MonoBehaviour
 {
 	public GameObject pauseUI;
-
+	CursorLockMode oldCursorMode;
 	private bool isPaused;
 
 	private void Start()
@@ -38,21 +38,18 @@ public class PauseUI : MonoBehaviour
 
 	public void Resume()
 	{
-		Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
+		Cursor.lockState = oldCursorMode;
 		pauseUI.SetActive(false);
 		Time.timeScale = 1f;
-
 		isPaused = false;
 	}
 
 	public void Pause()
 	{
-		Cursor.lockState = CursorLockMode.Confined;
-		Cursor.visible = true;
+		oldCursorMode = Cursor.lockState;
+		Cursor.lockState = CursorLockMode.None;
 		pauseUI.SetActive(true);
 		Time.timeScale = 0f;
-
 		isPaused = true;
 	}
 }

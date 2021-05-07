@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: be268a2fefc9e6e49abcb0ac6828addc, type: 3}
   physical: {fileID: 4154339794966870361, guid: 35e4a6cbab10f6943b091d3c4c87cad6, type: 3}
+  durability: 10
